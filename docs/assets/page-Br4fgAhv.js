@@ -1,0 +1,2 @@
+import{j as s}from"./index-KkV55Yb3.js";import{H as e}from"./Header-7R2j8kxW.js";import{F as a}from"./Footer-CZx9KqB0.js";import{H as o,N as i,S as t,B as r,F as n,R as c,C as x,P as j,M as m,a as S,b as l}from"./ContactSection-CTfqPW8h.js";const h=()=>s.jsxs("div",{className:"min-h-screen bg-white",children:[s.jsx(e,{}),s.jsxs("main",{children:[s.jsx(o,{}),s.jsx(i,{}),s.jsx(t,{}),s.jsx(r,{}),s.jsx(n,{}),s.jsx(c,{}),s.jsx(x,{}),s.jsx(j,{}),s.jsx(m,{}),s.jsx(S,{}),s.jsx(l,{})]}),s.jsx(a,{})]});export{h as default};
+//# sourceMappingURL=page-Br4fgAhv.js.map
