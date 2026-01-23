@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const BraidUmbrellaSection: React.FC = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section id="braid" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +13,7 @@ const BraidUmbrellaSection: React.FC = () => {
           <div>
             <img
               src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/cnt02_img01.jpg"
-              alt="Miyabi Sakura Braided Long Umbrella"
+              alt={t('home.braidUmbrella.imageAlt1')}
               className="w-full rounded-lg shadow-lg"
             />
           </div>
@@ -18,15 +21,15 @@ const BraidUmbrellaSection: React.FC = () => {
           {/* Content */}
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              <span className="text-green-600">Miyabi Sakura Braided Long Umbrella</span>
+              <span className="text-green-600">{t('home.braidUmbrella.heading')}</span>
               <br />
-              Fusion of Braided Cord and Koshu-ori
+              {t('home.braidUmbrella.subheading')}
             </h2>
             <div className="prose prose-lg text-gray-600">
               <p>
-                A Japanese umbrella that embodies Japanese aesthetic sense!
+                {t('home.braidUmbrella.description1')}
                 <br />
-                An umbrella with a Japanese atmosphere has been completed.
+                {t('home.braidUmbrella.description2')}
               </p>
             </div>
           </div>
@@ -38,15 +41,14 @@ const BraidUmbrellaSection: React.FC = () => {
           <div>
             <div className="prose prose-lg text-gray-600 mb-8">
               <p>
-                The handle is made from Nara Yoshino mountain cherry wood, carefully wrapped with braided cord.
-                It has a pleasant feel and won't slip with just a light grip.
+                {t('home.braidUmbrella.paragraph1')}
               </p>
             </div>
 
             {/* Achievements */}
             <div className="space-y-3 text-sm text-gray-600">
-              <p><span className="text-red-600 font-semibold">*</span> Winner of Omotenashi Selection Award.</p>
-              <p><span className="text-red-600 font-semibold">*</span> Utility model patent obtained for braided cord handle.</p>
+              <p><span className="text-red-600 font-semibold">*</span> {t('home.braidUmbrella.achievement1')}</p>
+              <p><span className="text-red-600 font-semibold">*</span> {t('home.braidUmbrella.achievement2')}</p>
             </div>
           </div>
 
@@ -54,7 +56,7 @@ const BraidUmbrellaSection: React.FC = () => {
           <div>
             <img
               src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/cnt02_img02.jpg"
-              alt="Miyabi Sakura Braided Long Umbrella Detail"
+              alt={t('home.braidUmbrella.imageAlt2')}
               className="w-full rounded-lg shadow-lg"
             />
           </div>

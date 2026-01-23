@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const FoldingUmbrellaSection: React.FC = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section id="folding" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +13,7 @@ const FoldingUmbrellaSection: React.FC = () => {
           <div>
             <img
               src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/cnt03_img01.jpg"
-              alt="Rain Pocket Folding Umbrella"
+              alt={t('home.foldingUmbrella.imageAlt1')}
               className="w-full rounded-lg shadow-lg"
             />
           </div>
@@ -18,17 +21,17 @@ const FoldingUmbrellaSection: React.FC = () => {
           {/* Content */}
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              <span className="text-green-600">Rain Pocket Folding Umbrella</span>
+              <span className="text-green-600">{t('home.foldingUmbrella.heading')}</span>
               <br />
-              When closed, store it immediately without folding
+              {t('home.foldingUmbrella.subheading')}
             </h2>
             <div className="prose prose-lg text-gray-600">
               <p>
-                Solves the problems of folding umbrellas!
+                {t('home.foldingUmbrella.description1')}
                 <br />
-                When closed, store it quickly without folding.
+                {t('home.foldingUmbrella.description2')}
                 <br />
-                Are you having trouble storing your folding umbrella on crowded trains and buses?
+                {t('home.foldingUmbrella.description3')}
               </p>
             </div>
           </div>
@@ -40,14 +43,14 @@ const FoldingUmbrellaSection: React.FC = () => {
           <div>
             <div className="prose prose-lg text-gray-600 mb-8">
               <p>
-                When you have luggage on the train, wet umbrellas are easy to carry and very useful.
+                {t('home.foldingUmbrella.paragraph1')}
               </p>
             </div>
 
             {/* Achievements */}
             <div className="space-y-3 text-sm text-gray-600">
-              <p><span className="text-red-600 font-semibold">*</span> Featured on TV broadcasts.</p>
-              <p><span className="text-red-600 font-semibold">*</span> Patent obtained.</p>
+              <p><span className="text-red-600 font-semibold">*</span> {t('home.foldingUmbrella.achievement1')}</p>
+              <p><span className="text-red-600 font-semibold">*</span> {t('home.foldingUmbrella.achievement2')}</p>
             </div>
           </div>
 
@@ -55,7 +58,7 @@ const FoldingUmbrellaSection: React.FC = () => {
           <div>
             <img
               src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/cnt03_img02.jpg"
-              alt="Rain Pocket Folding Umbrella Detail"
+              alt={t('home.foldingUmbrella.imageAlt2')}
               className="w-full rounded-lg shadow-lg"
             />
           </div>

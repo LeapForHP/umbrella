@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HeroSection: React.FC = () => {
+  const { t } = useTranslation('common');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -10,17 +12,17 @@ const HeroSection: React.FC = () => {
       products: [
         {
           image: 'https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/fv01-01.jpg',
-          alt: 'Silent Umbrella',
+          alt: t('home.hero.slide1Products.product1Alt'),
           link: '#silent'
         },
         {
           image: 'https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/fv01-02.jpg',
-          alt: 'Miyabi Sakura Braided Long Umbrella',
+          alt: t('home.hero.slide1Products.product2Alt'),
           link: '#braid'
         },
         {
           image: 'https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/fv01-03.jpg',
-          alt: 'Rain Pocket Folding Umbrella',
+          alt: t('home.hero.slide1Products.product3Alt'),
           link: '#folding'
         }
       ]
@@ -29,15 +31,15 @@ const HeroSection: React.FC = () => {
       id: 2,
       type: 'main',
       image: 'https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/fv02.jpg',
-      title: 'Handcrafted by Japanese Artisans',
-      alt: 'Main Visual 02'
+      title: t('home.hero.slide2.title'),
+      alt: t('home.hero.slide2.alt')
     },
     {
       id: 3,
       type: 'main',
       image: 'https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/fv03.jpg',
-      title: 'Inheriting Traditional Craftsmanship',
-      alt: 'Main Visual 03'
+      title: t('home.hero.slide3.title'),
+      alt: t('home.hero.slide3.alt')
     }
   ];
 

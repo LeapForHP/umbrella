@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ApplicationsSection: React.FC = () => {
+  const { t } = useTranslation('common');
   const [activeTab, setActiveTab] = useState(0);
 
   const applications = [
     {
       id: 1,
-      title: "Daily Use",
-      description: "Perfect for everyday protection from rain and sun",
+      title: t('home.applications.dailyUse'),
+      description: t('home.applications.dailyUseDesc'),
       image: "https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/img05.jpg"
     },
     {
       id: 2,
-      title: "Business",
-      description: "Professional umbrellas for business occasions",
+      title: t('home.applications.business'),
+      description: t('home.applications.businessDesc'),
       image: "https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/img06.jpg"
     },
     {
       id: 3,
-      title: "Special Events",
-      description: "Elegant designs for ceremonies and special occasions",
+      title: t('home.applications.specialEvents'),
+      description: t('home.applications.specialEventsDesc'),
       image: "https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/img07.jpg"
     }
   ];
@@ -28,8 +30,8 @@ const ApplicationsSection: React.FC = () => {
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Applications</h2>
-          <p className="text-gray-600">Discover the perfect umbrella for every occasion</p>
+          <h2 className="text-3xl font-bold mb-4">{t('home.applications.heading')}</h2>
+          <p className="text-gray-600">{t('home.applications.subtitle')}</p>
         </div>
 
         {/* Tab Navigation */}
@@ -72,7 +74,7 @@ const ApplicationsSection: React.FC = () => {
                     href="#products"
                     className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap"
                   >
-                    View Products
+                    {t('home.applications.button')}
                     <i className="ri-arrow-right-line ml-2"></i>
                   </a>
                 </div>

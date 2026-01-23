@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function TechnologySection() {
+  const { t } = useTranslation('common');
   const [activePoint, setActivePoint] = useState(0);
 
   const technologies = [
@@ -51,7 +53,7 @@ export default function TechnologySection() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            การปรับแต่งโมดูลแบตเตอรี่ลิเธียม
+            {t('home.technology.heading')}
           </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </div>
@@ -105,7 +107,7 @@ export default function TechnologySection() {
                 href="#contact"
                 className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
               >
-                เรียนรู้เพิ่มเติม
+                {t('home.technology.button')}
                 <i className="ri-arrow-right-line ml-2"></i>
               </a>
             </div>
@@ -116,7 +118,7 @@ export default function TechnologySection() {
             <div className="relative">
               <img
                 src="https://www.gushine.com/jp/uploads/image/20250122/2608648d6546e3df10f824e701359016.webp"
-                alt="Battery Technology"
+                alt={t('home.technology.imageAlt')}
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
               

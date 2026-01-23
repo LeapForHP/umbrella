@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
+  const { t, i18n } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Determine current language based on URL
   const getCurrentLanguage = () => {
     if (location.pathname.startsWith('/zh')) {
       return 'zh';
     }
-    return 'ja'; // Default to Japanese
+    if (location.pathname.startsWith('/ja')) {
+      return 'ja';
+    }
+    return 'en'; // Default to English
   };
 
   const currentLanguage = getCurrentLanguage();
@@ -21,8 +27,8 @@ const Header: React.FC = () => {
   const getLanguageInfo = (lang: string) => {
     switch (lang) {
       case 'ja':
-        return { 
-          name: '日本語', 
+        return {
+          name: t('language.japanese'),
           flag: (
             <div className="w-6 h-4 bg-white border border-gray-200 rounded-sm flex items-center justify-center relative">
               <div className="w-3 h-3 bg-red-600 rounded-full"></div>
@@ -30,8 +36,8 @@ const Header: React.FC = () => {
           )
         };
       case 'en':
-        return { 
-          name: 'English', 
+        return {
+          name: t('language.english'),
           flag: (
             <div className="w-6 h-4 bg-red-600 rounded-sm flex items-center justify-center">
               <div className="w-4 h-3 bg-white rounded-sm flex items-center justify-center">
@@ -41,8 +47,8 @@ const Header: React.FC = () => {
           )
         };
       case 'zh':
-        return { 
-          name: '中文', 
+        return {
+          name: t('language.chinese'),
           flag: (
             <div className="w-6 h-4 bg-red-600 rounded-sm flex items-center justify-center relative">
               <div className="absolute top-0 left-0 w-3 h-2 bg-red-600"></div>
@@ -53,39 +59,48 @@ const Header: React.FC = () => {
           )
         };
       default:
-        return { name: '日本語', flag: null };
+        return { name: t('language.japanese'), flag: null };
     }
   };
 
-  // Get path for language switch
-  const getLanguagePath = (targetLang: string) => {
-    const currentPath = location.pathname;
-    
-    if (targetLang === 'ja') {
-      // Convert to Japanese (default) - remove language prefix
-      if (currentPath.startsWith('/zh')) {
-        return currentPath.replace('/zh', '') || '/';
-      }
-      return currentPath;
-    } else if (targetLang === 'zh') {
-      // Convert to Chinese
-      if (currentPath.startsWith('/zh')) {
-        return currentPath;
-      }
-      return currentPath === '/' ? '/zh' : `/zh${currentPath}`;
-    } else if (targetLang === 'en') {
-      // Convert to English (same as Japanese for now)
-      if (currentPath.startsWith('/zh')) {
-        return currentPath.replace('/zh', '') || '/';
-      }
-      return currentPath;
+  // Change language and navigate to corresponding path
+  const changeLanguage = (targetLang: string) => {
+    let currentPath = location.pathname;
+
+    // Remove current language prefix
+    if (currentPath.startsWith('/zh')) {
+      currentPath = currentPath.replace('/zh', '') || '/';
+    } else if (currentPath.startsWith('/ja')) {
+      currentPath = currentPath.replace('/ja', '') || '/';
     }
-    
-    return currentPath;
+
+    // Add target language prefix and navigate
+    let newPath = currentPath;
+    if (targetLang === 'ja') {
+      newPath = currentPath === '/' ? '/ja' : `/ja${currentPath}`;
+    } else if (targetLang === 'zh') {
+      newPath = currentPath === '/' ? '/zh' : `/zh${currentPath}`;
+    }
+
+    // Change i18n language
+    i18n.changeLanguage(targetLang);
+
+    // Navigate to new path
+    navigate(newPath);
+    setIsLanguageOpen(false);
   };
 
   const languages = ['ja', 'en', 'zh'];
   const currentLangInfo = getLanguageInfo(currentLanguage);
+
+  // Get base path for current language
+  const getBasePath = () => {
+    if (currentLanguage === 'zh') return '/zh';
+    if (currentLanguage === 'ja') return '/ja';
+    return '';
+  };
+
+  const basePath = getBasePath();
 
   return (
     <header className="bg-white shadow-sm relative z-50">
@@ -94,156 +109,94 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1>
-              <a href={currentLanguage === 'zh' ? '/zh' : '/'} className="flex items-center">
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg" 
+              <Link to={basePath || '/'} className="flex items-center">
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg"
                   alt="Maruyasu Umbrella Co., Ltd. | Handcrafted Japanese Umbrellas"
                   className="h-12"
                 />
-              </a>
+              </Link>
             </h1>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            {currentLanguage === 'zh' ? (
-              <>
-                <a href="/zh" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">首页</a>
-                <div className="relative">
-                  <button
-                    onClick={() => setIsProductsOpen(!isProductsOpen)}
-                    className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
-                  >
-                    <span>产品</span>
-                    <i className={`ri-arrow-down-s-line transition-transform ${isProductsOpen ? 'rotate-180' : ''}`}></i>
-                  </button>
-                  
-                  {isProductsOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
-                      <div className="py-2">
-                        <Link 
-                          to="/zh/products/silent-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          静音伞
-                        </Link>
-                        <Link 
-                          to="/zh/products/braid-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          雅樱编织长伞
-                        </Link>
-                        <Link 
-                          to="/zh/products/folding-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          雨袋折叠伞
-                        </Link>
-                        <Link 
-                          to="/zh/products/parasol" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          晴雨两用伞
-                        </Link>
-                        <Link 
-                          to="/zh/products/koshu-weaving" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          甲州织
-                        </Link>
-                        <Link 
-                          to="/zh/products/others" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          其他
-                        </Link>
-                      </div>
-                    </div>
-                  )}
+            <Link to={basePath || '/'} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+              {t('nav.home')}
+            </Link>
+
+            <div className="relative">
+              <button
+                onClick={() => setIsProductsOpen(!isProductsOpen)}
+                className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                <span>{t('nav.products')}</span>
+                <i className={`ri-arrow-down-s-line transition-transform ${isProductsOpen ? 'rotate-180' : ''}`}></i>
+              </button>
+
+              {isProductsOpen && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
+                  <div className="py-2">
+                    <Link
+                      to={`${basePath}/products/silent-umbrella`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.silentUmbrella')}
+                    </Link>
+                    <Link
+                      to={`${basePath}/products/braid-umbrella`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.braidUmbrella')}
+                    </Link>
+                    <Link
+                      to={`${basePath}/products/folding-umbrella`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.foldingUmbrella')}
+                    </Link>
+                    <Link
+                      to={`${basePath}/products/parasol`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.parasol')}
+                    </Link>
+                    <Link
+                      to={`${basePath}/products/koshu-weaving`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.koshuWeaving')}
+                    </Link>
+                    <Link
+                      to={`${basePath}/products/others`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={() => setIsProductsOpen(false)}
+                    >
+                      {t('products.others')}
+                    </Link>
+                  </div>
                 </div>
-                <Link to="/zh/repair" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
-                  维修服务
-                </Link>
-                <Link to="/zh/about" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">关于我们</Link>
-                <Link to="/zh/news" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">新闻</Link>
-                <Link to="/zh/contact" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">联系我们</Link>
-              </>
-            ) : (
-              <>
-                <a href="/" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">ホーム</a>
-                <div className="relative">
-                  <button
-                    onClick={() => setIsProductsOpen(!isProductsOpen)}
-                    className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
-                  >
-                    <span>製品</span>
-                    <i className={`ri-arrow-down-s-line transition-transform ${isProductsOpen ? 'rotate-180' : ''}`}></i>
-                  </button>
-                  
-                  {isProductsOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
-                      <div className="py-2">
-                        <Link 
-                          to="/products/silent-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          静音傘
-                        </Link>
-                        <Link 
-                          to="/products/braid-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          雅桜編組長傘
-                        </Link>
-                        <Link 
-                          to="/products/folding-umbrella" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          レインポケット折りたたみ傘
-                        </Link>
-                        <Link 
-                          to="/products/parasol" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          晴雨兼用日傘
-                        </Link>
-                        <Link 
-                          to="/products/koshu-weaving" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          甲州織
-                        </Link>
-                        <Link 
-                          to="/products/others" 
-                          className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                          onClick={() => setIsProductsOpen(false)}
-                        >
-                          その他
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <Link to="/repair" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
-                  修理サービス
-                </Link>
-                <Link to="/about" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">会社概要</Link>
-                <Link to="/news" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">ニュース</Link>
-                <Link to="/contact" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">お問い合わせ</Link>
-              </>
-            )}
-            
+              )}
+            </div>
+
+            <Link to={`${basePath}/repair`} className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
+              {t('nav.repair')}
+            </Link>
+            <Link to={`${basePath}/about`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+              {t('nav.about')}
+            </Link>
+            <Link to={`${basePath}/news`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+              {t('nav.news')}
+            </Link>
+            <Link to={`${basePath}/contact`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+              {t('nav.contact')}
+            </Link>
+
             {/* Language Dropdown */}
             <div className="relative">
               <button
@@ -254,26 +207,25 @@ const Header: React.FC = () => {
                 <span className="text-sm font-medium">{currentLangInfo.name}</span>
                 <i className={`ri-arrow-down-s-line text-xs transition-transform ${isLanguageOpen ? 'rotate-180' : ''}`}></i>
               </button>
-              
+
               {isLanguageOpen && (
                 <div className="absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border z-50">
                   <div className="py-2">
                     {languages.map((lang) => {
                       const langInfo = getLanguageInfo(lang);
                       return (
-                        <a
+                        <button
                           key={lang}
-                          href={getLanguagePath(lang)}
-                          className={`flex items-center space-x-2 px-4 py-2 text-sm transition-colors cursor-pointer ${
+                          onClick={() => changeLanguage(lang)}
+                          className={`w-full flex items-center space-x-2 px-4 py-2 text-sm transition-colors cursor-pointer ${
                             lang === currentLanguage
                               ? 'bg-green-50 text-green-600'
                               : 'text-gray-700 hover:bg-green-50 hover:text-green-600'
                           }`}
-                          onClick={() => setIsLanguageOpen(false)}
                         >
                           {langInfo.flag}
                           <span>{langInfo.name}</span>
-                        </a>
+                        </button>
                       );
                     })}
                   </div>
@@ -300,57 +252,56 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-white border-t">
             <div className="py-4 space-y-4">
-              {currentLanguage === 'zh' ? (
-                <>
-                  <a href="/zh" className="block text-gray-700 hover:text-green-600 font-medium">首页</a>
-                  <div>
-                    <div className="text-gray-700 font-medium mb-2">产品</div>
-                    <div className="pl-4 space-y-2">
-                      <Link to="/zh/products/silent-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- 静音伞</Link>
-                      <Link to="/zh/products/braid-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- 雅樱编织长伞</Link>
-                      <Link to="/zh/products/folding-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- 雨袋折叠伞</Link>
-                      <Link to="/zh/products/parasol" className="block text-sm text-gray-600 hover:text-green-600">- 晴雨两用伞</Link>
-                      <Link to="/zh/products/koshu-weaving" className="block text-sm text-gray-600 hover:text-green-600">- 甲州织</Link>
-                      <Link to="/zh/products/others" className="block text-sm text-gray-600 hover:text-green-600">- 其他</Link>
-                    </div>
-                  </div>
-                  <Link to="/zh/repair" className="block text-gray-700 hover:text-green-600 font-medium">维修服务</Link>
-                  <Link to="/zh/about" className="block text-gray-700 hover:text-green-600 font-medium">关于我们</Link>
-                  <Link to="/zh/news" className="block text-gray-700 hover:text-green-600 font-medium">新闻</Link>
-                  <Link to="/zh/contact" className="block text-gray-700 hover:text-green-600 font-medium">联系我们</Link>
-                </>
-              ) : (
-                <>
-                  <a href="/" className="block text-gray-700 hover:text-green-600 font-medium">ホーム</a>
-                  <div>
-                    <div className="text-gray-700 font-medium mb-2">製品</div>
-                    <div className="pl-4 space-y-2">
-                      <Link to="/products/silent-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- 静音傘</Link>
-                      <Link to="/products/braid-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- 雅桜編組長傘</Link>
-                      <Link to="/products/folding-umbrella" className="block text-sm text-gray-600 hover:text-green-600">- レインポケット折りたたみ傘</Link>
-                      <Link to="/products/parasol" className="block text-sm text-gray-600 hover:text-green-600">- 晴雨兼用日傘</Link>
-                      <Link to="/products/koshu-weaving" className="block text-sm text-gray-600 hover:text-green-600">- 甲州織</Link>
-                      <Link to="/products/others" className="block text-sm text-gray-600 hover:text-green-600">- その他</Link>
-                    </div>
-                  </div>
-                  <Link to="/repair" className="block text-gray-700 hover:text-green-600 font-medium">修理サービス</Link>
-                  <Link to="/about" className="block text-gray-700 hover:text-green-600 font-medium">会社概要</Link>
-                  <Link to="/news" className="block text-gray-700 hover:text-green-600 font-medium">ニュース</Link>
-                  <Link to="/contact" className="block text-gray-700 hover:text-green-600 font-medium">お問い合わせ</Link>
-                </>
-              )}
-              
+              <Link to={basePath || '/'} className="block text-gray-700 hover:text-green-600 font-medium">
+                {t('nav.home')}
+              </Link>
+              <div>
+                <div className="text-gray-700 font-medium mb-2">{t('nav.products')}</div>
+                <div className="pl-4 space-y-2">
+                  <Link to={`${basePath}/products/silent-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.silentUmbrella')}
+                  </Link>
+                  <Link to={`${basePath}/products/braid-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.braidUmbrella')}
+                  </Link>
+                  <Link to={`${basePath}/products/folding-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.foldingUmbrella')}
+                  </Link>
+                  <Link to={`${basePath}/products/parasol`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.parasol')}
+                  </Link>
+                  <Link to={`${basePath}/products/koshu-weaving`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.koshuWeaving')}
+                  </Link>
+                  <Link to={`${basePath}/products/others`} className="block text-sm text-gray-600 hover:text-green-600">
+                    - {t('products.others')}
+                  </Link>
+                </div>
+              </div>
+              <Link to={`${basePath}/repair`} className="block text-gray-700 hover:text-green-600 font-medium">
+                {t('nav.repair')}
+              </Link>
+              <Link to={`${basePath}/about`} className="block text-gray-700 hover:text-green-600 font-medium">
+                {t('nav.about')}
+              </Link>
+              <Link to={`${basePath}/news`} className="block text-gray-700 hover:text-green-600 font-medium">
+                {t('nav.news')}
+              </Link>
+              <Link to={`${basePath}/contact`} className="block text-gray-700 hover:text-green-600 font-medium">
+                {t('nav.contact')}
+              </Link>
+
               {/* Mobile Language Selection */}
               <div className="pt-4 border-t">
-                <div className="text-gray-700 font-medium mb-2">言語 / Language</div>
+                <div className="text-gray-700 font-medium mb-2">Language</div>
                 <div className="space-y-2">
                   {languages.map((lang) => {
                     const langInfo = getLanguageInfo(lang);
                     return (
-                      <a
+                      <button
                         key={lang}
-                        href={getLanguagePath(lang)}
-                        className={`flex items-center space-x-2 text-sm cursor-pointer ${
+                        onClick={() => changeLanguage(lang)}
+                        className={`w-full flex items-center space-x-2 text-sm cursor-pointer ${
                           lang === currentLanguage
                             ? 'text-green-600 font-medium'
                             : 'text-gray-600 hover:text-green-600'
@@ -358,20 +309,20 @@ const Header: React.FC = () => {
                       >
                         {langInfo.flag}
                         <span>{langInfo.name}</span>
-                      </a>
+                      </button>
                     );
                   })}
                 </div>
               </div>
-              
+
               <div className="pt-4 border-t">
                 <div className="flex items-center text-green-600 mb-2">
                   <i className="ri-phone-line mr-2"></i>
                   <span className="font-mono">06-6713-8308</span>
                 </div>
-                <Link to={currentLanguage === 'zh' ? '/zh/contact' : '/contact'} className="flex items-center text-green-600">
+                <Link to={`${basePath}/contact`} className="flex items-center text-green-600">
                   <i className="ri-mail-line mr-2"></i>
-                  <span>{currentLanguage === 'zh' ? '联系我们' : 'お問い合わせ'}</span>
+                  <span>{t('nav.contact')}</span>
                 </Link>
               </div>
             </div>

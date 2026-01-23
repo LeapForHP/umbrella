@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation('common');
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -10,14 +12,14 @@ const Footer: React.FC = () => {
             <div className="mb-6">
               <img
                 src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg"
-                alt="Maruyasu Umbrella Co., Ltd. | Handcrafted Japanese Umbrellas"
+                alt={t('footer.logoAlt')}
                 className="h-12 mb-4"
               />
-              <h3 className="text-lg font-semibold mb-2">Maruyasu Umbrella Co., Ltd.</h3>
+              <h3 className="text-lg font-semibold mb-2">{t('footer.companyName')}</h3>
               <address className="text-gray-300 not-italic">
-                〒545-0001<br />
-                2-6-15 Tennoji-cho Kita, Abeno-ku,<br />
-                Osaka City, Osaka
+                {t('footer.address.postalCode')}<br />
+                {t('footer.address.line1')}<br />
+                {t('footer.address.line2')}
               </address>
             </div>
           </div>
@@ -30,7 +32,7 @@ const Footer: React.FC = () => {
                 <ul className="space-y-3">
                   <li>
                     <a href="/" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      Home
+                      {t('footer.navigation.home')}
                     </a>
                   </li>
                 </ul>
@@ -38,36 +40,36 @@ const Footer: React.FC = () => {
 
               {/* Products */}
               <div>
-                <h4 className="text-white font-semibold mb-4">Products</h4>
+                <h4 className="text-white font-semibold mb-4">{t('footer.navigation.productsHeading')}</h4>
                 <ul className="space-y-3">
                   <li>
                     <a href="#silent" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Silent Umbrella
+                      {t('footer.navigation.silentUmbrella')}
                     </a>
                   </li>
                   <li>
                     <a href="#braid" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Miyabi Sakura Braided Long Umbrella
+                      {t('footer.navigation.braidUmbrella')}
                     </a>
                   </li>
                   <li>
                     <a href="#folding" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Rain Pocket Folding Umbrella
+                      {t('footer.navigation.foldingUmbrella')}
                     </a>
                   </li>
                   <li>
                     <a href="#parasol" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Sun & Rain Parasol
+                      {t('footer.navigation.parasol')}
                     </a>
                   </li>
                   <li>
                     <a href="#koshu" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Koshu-ori
+                      {t('footer.navigation.koshuOri')}
                     </a>
                   </li>
                   <li>
                     <a href="#others" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      - Others
+                      {t('footer.navigation.others')}
                     </a>
                   </li>
                 </ul>
@@ -78,27 +80,27 @@ const Footer: React.FC = () => {
                 <ul className="space-y-3">
                   <li>
                     <a href="#company" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      About Us
+                      {t('footer.navigation.aboutUs')}
                     </a>
                   </li>
                   <li>
                     <a href="#news" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      News
+                      {t('footer.navigation.news')}
                     </a>
                   </li>
                   <li>
                     <a href="#repair" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      Repair Service
+                      {t('footer.navigation.repairService')}
                     </a>
                   </li>
                   <li>
                     <a href="#contact" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      Contact
+                      {t('footer.navigation.contact')}
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      Sitemap
+                      {t('footer.navigation.sitemap')}
                     </a>
                   </li>
                 </ul>
@@ -111,16 +113,16 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              Copyright © Maruyasu Umbrella Co., Ltd. All rights reserved.
+              {t('footer.copyright')}
             </p>
             <div className="mt-4 sm:mt-0">
-              <a 
-                href="https://readdy.ai/?origin=logo" 
+              <a
+                href="https://readdy.ai/?origin=logo"
                 className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Website Builder
+                {t('footer.websiteBuilder')}
               </a>
             </div>
           </div>

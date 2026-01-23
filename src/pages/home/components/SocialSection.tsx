@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const SocialSection: React.FC = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section id="social" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,15 +12,15 @@ const SocialSection: React.FC = () => {
           <div>
             <div className="text-center mb-6">
               <p className="text-lg font-semibold text-gray-900">
-                \Facebook - Updated Regularly/
+                {t('home.social.facebookTitle')}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
                 <div className="text-center text-gray-500">
                   <i className="ri-facebook-fill text-4xl mb-2"></i>
-                  <p>Facebook Feed</p>
-                  <p className="text-sm">Follow us for latest updates</p>
+                  <p>{t('home.social.facebookFeedText')}</p>
+                  <p className="text-sm">{t('home.social.facebookFollowText')}</p>
                 </div>
               </div>
             </div>
@@ -27,7 +30,7 @@ const SocialSection: React.FC = () => {
           <div>
             <div className="text-center mb-6">
               <p className="text-lg font-semibold text-gray-900">
-                \Purchase Here/
+                {t('home.social.purchaseTitle')}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -40,7 +43,7 @@ const SocialSection: React.FC = () => {
               >
                 <img
                   src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bnr_base.png"
-                  alt="BASE"
+                  alt={t('home.social.baseAlt')}
                   className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                 />
               </a>
@@ -54,7 +57,7 @@ const SocialSection: React.FC = () => {
               >
                 <img
                   src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bnr_yt.png"
-                  alt="YOUTUBE"
+                  alt={t('home.social.youtubeAlt')}
                   className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                 />
               </a>
@@ -68,7 +71,7 @@ const SocialSection: React.FC = () => {
               >
                 <img
                   src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bnr_yh.png"
-                  alt="Yahoo Shopping"
+                  alt={t('home.social.yahooShoppingAlt')}
                   className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                 />
               </a>
@@ -82,7 +85,7 @@ const SocialSection: React.FC = () => {
               >
                 <img
                   src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bnr_ig.png"
-                  alt="Instagram"
+                  alt={t('home.social.instagramAlt')}
                   className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                 />
               </a>

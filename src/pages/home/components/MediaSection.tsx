@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MediaSection: React.FC = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section id="media" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +13,7 @@ const MediaSection: React.FC = () => {
             <div className="mb-8">
               <img
                 src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/top/media_ttl.png"
-                alt="Rain Pocket Shizuku featured on TV"
+                alt={t('home.media.imageAlt')}
                 className="max-w-full h-auto"
               />
             </div>
@@ -23,7 +26,7 @@ const MediaSection: React.FC = () => {
                 width="100%"
                 height="100%"
                 src="https://www.youtube.com/embed/mgbry1tOaBE"
-                title="Rain Pocket Shizuku - YouTube video player"
+                title={t('home.media.videoTitle')}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

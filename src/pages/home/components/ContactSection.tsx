@@ -1,15 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ContactSection: React.FC = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Contact
+            {t('home.contact.heading')}
           </h2>
-          <p className="text-lg text-gray-600 uppercase tracking-wider">Get in Touch</p>
+          <p className="text-lg text-gray-600 uppercase tracking-wider">{t('home.contact.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -19,11 +22,11 @@ const ContactSection: React.FC = () => {
               <div className="flex items-center justify-center lg:justify-start mb-4">
                 <i className="ri-phone-line text-blue-600 text-2xl mr-3"></i>
                 <span className="text-2xl lg:text-3xl font-mono font-bold text-gray-900">
-                  06-6713-8308
+                  {t('home.contact.phone')}
                 </span>
               </div>
               <p className="text-gray-600 mb-4">
-                Business Hours: 10:00-17:00 (Closed: Sat, Sun, Holidays)
+                {t('home.contact.businessHours')}
               </p>
             </div>
           </div>
@@ -36,7 +39,7 @@ const ContactSection: React.FC = () => {
             >
               <div className="flex items-center justify-center lg:justify-start">
                 <i className="ri-mail-line text-2xl mr-3"></i>
-                <span className="text-xl font-semibold">Email Inquiry</span>
+                <span className="text-xl font-semibold">{t('home.contact.emailButton')}</span>
                 <i className="ri-arrow-right-line ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
               </div>
             </a>
@@ -53,7 +56,7 @@ const ContactSection: React.FC = () => {
           >
             <img
               src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bannur.jpg"
-              alt="Visit Our Online Store"
+              alt={t('home.contact.onlineStoreAlt')}
               className="max-w-full h-auto rounded-lg shadow-lg"
             />
           </a>
