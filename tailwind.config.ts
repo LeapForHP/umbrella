@@ -11,6 +11,8 @@ export default {
       fontFamily: {
         'thai': ['Noto Sans Thai', 'sans-serif'],
         'logo': ['Pacifico', 'serif'],
+        'serif-jp': ['Noto Serif JP', 'Yu Mincho', '游明朝', 'YuMincho', 'serif'],
+        'sans-jp': ['Noto Sans JP', 'Yu Gothic', '游ゴシック', 'YuGothic', 'sans-serif'],
       },
       colors: {
         primary: {

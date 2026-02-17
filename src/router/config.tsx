@@ -1,48 +1,22 @@
-
 import { RouteObject } from 'react-router-dom';
 import { lazy } from 'react';
 
-// Lazy load components
-const HomePage = lazy(() => import('../pages/home/page'));
-const AboutPage = lazy(() => import('../pages/about/page'));
-const NewsPage = lazy(() => import('../pages/news/page'));
-const ContactPage = lazy(() => import('../pages/contact/page'));
-const RepairPage = lazy(() => import('../pages/repair/page'));
-const SilentUmbrellaPage = lazy(() => import('../pages/products/silent-umbrella/page'));
-const BraidUmbrellaPage = lazy(() => import('../pages/products/braid-umbrella/page'));
-const FoldingUmbrellaPage = lazy(() => import('../pages/products/folding-umbrella/page'));
-const ParasolPage = lazy(() => import('../pages/products/parasol/page'));
-const KoshuWeavingPage = lazy(() => import('../pages/products/koshu-weaving/page'));
-const OthersPage = lazy(() => import('../pages/products/others/page'));
+// Lazy load components (now unified for all languages)
+const HomePage = lazy(() => import('../pages/home'));
+const AboutPage = lazy(() => import('../pages/about'));
+const NewsPage = lazy(() => import('../pages/news'));
+const ContactPage = lazy(() => import('../pages/contact'));
+const RepairPage = lazy(() => import('../pages/repair'));
+const SilentUmbrellaPage = lazy(() => import('../pages/products/silent-umbrella'));
+const BraidUmbrellaPage = lazy(() => import('../pages/products/braid-umbrella'));
+const FoldingUmbrellaPage = lazy(() => import('../pages/products/folding-umbrella'));
+const ParasolPage = lazy(() => import('../pages/products/parasol'));
+const KoshuWeavingPage = lazy(() => import('../pages/products/koshu-weaving'));
+const OthersPage = lazy(() => import('../pages/products/others'));
 const NotFoundPage = lazy(() => import('../pages/NotFound'));
 
-// Japanese pages
-const HomePageJa = lazy(() => import('../pages/ja/page'));
-const ContactPageJa = lazy(() => import('../pages/ja/contact/page'));
-const AboutPageJa = lazy(() => import('../pages/ja/about/page'));
-const NewsPageJa = lazy(() => import('../pages/ja/news/page'));
-const RepairPageJa = lazy(() => import('../pages/ja/repair/page'));
-const SilentUmbrellaPageJa = lazy(() => import('../pages/ja/products/silent-umbrella/page'));
-const BraidUmbrellaPageJa = lazy(() => import('../pages/ja/products/braid-umbrella/page'));
-const FoldingUmbrellaPageJa = lazy(() => import('../pages/ja/products/folding-umbrella/page'));
-const ParasolPageJa = lazy(() => import('../pages/ja/products/parasol/page'));
-const KoshuWeavingPageJa = lazy(() => import('../pages/ja/products/koshu-weaving/page'));
-const OthersPageJa = lazy(() => import('../pages/ja/products/others/page'));
-
-// Chinese pages
-const HomePageZh = lazy(() => import('../pages/zh/page'));
-const ContactPageZh = lazy(() => import('../pages/zh/contact/page'));
-const AboutPageZh = lazy(() => import('../pages/zh/about/page'));
-const NewsPageZh = lazy(() => import('../pages/zh/news/page'));
-const RepairPageZh = lazy(() => import('../pages/zh/repair/page'));
-const SilentUmbrellaPageZh = lazy(() => import('../pages/zh/products/silent-umbrella/page'));
-const BraidUmbrellaPageZh = lazy(() => import('../pages/zh/products/braid-umbrella/page'));
-const FoldingUmbrellaPageZh = lazy(() => import('../pages/zh/products/folding-umbrella/page'));
-const ParasolPageZh = lazy(() => import('../pages/zh/products/parasol/page'));
-const KoshuWeavingPageZh = lazy(() => import('../pages/zh/products/koshu-weaving/page'));
-const OthersPageZh = lazy(() => import('../pages/zh/products/others/page'));
-
 const routes: RouteObject[] = [
+  // English routes (default)
   {
     path: '/',
     element: <HomePage />
@@ -87,96 +61,100 @@ const routes: RouteObject[] = [
     path: '/products/others',
     element: <OthersPage />
   },
-  // Japanese routes
+
+  // Japanese routes (same components, language changes via i18n)
   {
     path: '/ja',
-    element: <HomePageJa />
-  },
-  {
-    path: '/ja/contact',
-    element: <ContactPageJa />
+    element: <HomePage />
   },
   {
     path: '/ja/about',
-    element: <AboutPageJa />
+    element: <AboutPage />
   },
   {
     path: '/ja/news',
-    element: <NewsPageJa />
+    element: <NewsPage />
+  },
+  {
+    path: '/ja/contact',
+    element: <ContactPage />
   },
   {
     path: '/ja/repair',
-    element: <RepairPageJa />
+    element: <RepairPage />
   },
   {
     path: '/ja/products/silent-umbrella',
-    element: <SilentUmbrellaPageJa />
+    element: <SilentUmbrellaPage />
   },
   {
     path: '/ja/products/braid-umbrella',
-    element: <BraidUmbrellaPageJa />
+    element: <BraidUmbrellaPage />
   },
   {
     path: '/ja/products/folding-umbrella',
-    element: <FoldingUmbrellaPageJa />
+    element: <FoldingUmbrellaPage />
   },
   {
     path: '/ja/products/parasol',
-    element: <ParasolPageJa />
+    element: <ParasolPage />
   },
   {
     path: '/ja/products/koshu-weaving',
-    element: <KoshuWeavingPageJa />
+    element: <KoshuWeavingPage />
   },
   {
     path: '/ja/products/others',
-    element: <OthersPageJa />
+    element: <OthersPage />
   },
-  // Chinese routes
+
+  // Chinese routes (same components, language changes via i18n)
   {
     path: '/zh',
-    element: <HomePageZh />
-  },
-  {
-    path: '/zh/contact',
-    element: <ContactPageZh />
+    element: <HomePage />
   },
   {
     path: '/zh/about',
-    element: <AboutPageZh />
+    element: <AboutPage />
   },
   {
     path: '/zh/news',
-    element: <NewsPageZh />
+    element: <NewsPage />
+  },
+  {
+    path: '/zh/contact',
+    element: <ContactPage />
   },
   {
     path: '/zh/repair',
-    element: <RepairPageZh />
+    element: <RepairPage />
   },
   {
     path: '/zh/products/silent-umbrella',
-    element: <SilentUmbrellaPageZh />
+    element: <SilentUmbrellaPage />
   },
   {
     path: '/zh/products/braid-umbrella',
-    element: <BraidUmbrellaPageZh />
+    element: <BraidUmbrellaPage />
   },
   {
     path: '/zh/products/folding-umbrella',
-    element: <FoldingUmbrellaPageZh />
+    element: <FoldingUmbrellaPage />
   },
   {
     path: '/zh/products/parasol',
-    element: <ParasolPageZh />
+    element: <ParasolPage />
   },
   {
     path: '/zh/products/koshu-weaving',
-    element: <KoshuWeavingPageZh />
+    element: <KoshuWeavingPage />
   },
   {
     path: '/zh/products/others',
-    element: <OthersPageZh />
+    element: <OthersPage />
   },
+
+  // 404 page
   {
     path: '*',
     element: <NotFoundPage />
