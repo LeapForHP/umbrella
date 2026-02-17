@@ -4,7 +4,6 @@ import { resolve } from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite'
 
 const isPreview = process.env.IS_PREVIEW ? true : false
-const isProd = process.env.NODE_ENV === 'production'
 const base = '/'
 // https://vite.dev/config/
 export default defineConfig({
