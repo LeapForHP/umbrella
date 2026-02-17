@@ -5,7 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 
 const isPreview = process.env.IS_PREVIEW ? true : false
 const isProd = process.env.NODE_ENV === 'production'
-const base = isProd ? '/umbrella/' : '/'
+const base = '/'
 // https://vite.dev/config/
 export default defineConfig({
   define: {

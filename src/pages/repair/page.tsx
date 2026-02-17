@@ -11,9 +11,9 @@ const LanguageDropdown: React.FC<LanguageDropdownProps> = ({ currentLang, onLang
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
-    { code: 'ja', name: '日本語', flag: '🇯🇵', path: '/ja/repair' },
-    { code: 'en', name: 'English', flag: '🇺🇸', path: '/repair' },
-    { code: 'zh', name: '中文', flag: '🇨🇳', path: '/zh/repair' }
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[1];
@@ -32,10 +32,9 @@ const LanguageDropdown: React.FC<LanguageDropdownProps> = ({ currentLang, onLang
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 min-w-[150px]">
           {languages.map((language) => (
-            <Link
+            <button
               key={language.code}
-              to={language.path}
-              className={`flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors ${
+              className={`w-full flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors text-left ${
                 currentLang === language.code ? 'bg-green-50 text-green-600' : 'text-gray-700'
               }`}
               onClick={() => {
@@ -45,7 +44,7 @@ const LanguageDropdown: React.FC<LanguageDropdownProps> = ({ currentLang, onLang
             >
               <span className="text-lg">{language.flag}</span>
               <span className="font-medium">{language.name}</span>
-            </Link>
+            </button>
           ))}
         </div>
       )}
@@ -54,7 +53,7 @@ const LanguageDropdown: React.FC<LanguageDropdownProps> = ({ currentLang, onLang
 };
 
 const RepairPage: React.FC = () => {
-  const [currentLang, setCurrentLang] = useState('en');
+  const [currentLang, setCurrentLang] = useState('ja');
   const [showMoreVoices, setShowMoreVoices] = useState(false);
 
   return (
@@ -129,9 +128,14 @@ const RepairPage: React.FC = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-green-600 text-white py-16">
+      <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold">Repair & Maintenance Service</h1>
+          <h1 className="text-5xl md:text-6xl font-serif-jp text-gray-800 mb-2">
+            修理・お直し
+          </h1>
+          <p className="text-xl text-gray-600 tracking-widest font-serif">
+            REPAIR
+          </p>
         </div>
       </section>
 
@@ -141,11 +145,11 @@ const RepairPage: React.FC = () => {
           <ol className="flex items-center space-x-2 text-sm">
             <li>
               <Link to="/" className="text-green-600 hover:text-green-700">
-                Home
+                ホーム
               </Link>
             </li>
-            <li className="text-gray-500">/</li>
-            <li className="text-gray-700">Repair Service</li>
+            <li className="text-gray-500">＞</li>
+            <li className="text-gray-700">修理・お直し</li>
           </ol>
         </div>
       </nav>
@@ -154,19 +158,19 @@ const RepairPage: React.FC = () => {
       <section className="bg-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
-            <a 
+            <a
               href="#repair"
               className="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-colors font-medium"
             >
-              Repair Service
+              修理サービス
             </a>
-            <a 
+            <a
               href="#voice"
               className="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-colors font-medium"
             >
-              Customer Reviews
+              お客様の声
             </a>
-            <a 
+            <a
               href="#facebook"
               className="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-colors font-medium"
             >
@@ -181,102 +185,102 @@ const RepairPage: React.FC = () => {
         {/* Repair Section */}
         <section id="repair" className="mb-20">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Umbrella Repair Service
-              <span className="block text-lg text-green-600 font-normal mt-2">SDGs Initiative</span>
+            <h2 className="text-4xl font-serif-jp text-gray-800 mb-4">
+              傘の修理について
             </h2>
+            <p className="text-base text-gray-600 mt-2 font-sans-jp">SDGsの取り組み</p>
           </div>
 
           {/* Repair Information */}
           <div className="space-y-12">
             {/* About Umbrella Repair */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                About Our Umbrella Repair Service
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                傘の修理について
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                If you wish to have your umbrella repaired, please fill out the repair request form attached to your umbrella and send it to us via courier service.<br />
-                If you don't have the repair request form, you can send just the umbrella (shipping costs to our company are at your expense).<br />
-                Once your umbrella arrives at our facility, our staff will contact you. Repair costs vary depending on the type and condition of the umbrella.<br />
-                After examining your umbrella, we will contact you by phone with the repair cost estimate. (Parts and materials may be updated if newer versions are available)
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                修理をご希望の方は、傘に付いております修理依頼書に記入し、宅配便にて弊社までお送りください。<br /><br />
+                修理依頼書がない場合は傘だけでも大丈夫です（弊社までの送料はお客様負担となります）。<br /><br />
+                傘が弊社に到着しましたら、担当者よりご連絡いたします。傘の種類や状態によって修理代金が変動いたします。<br /><br />
+                傘拝見後、お電話にて修理代金をお伝えいたします。（骨や生地は、新しいバージョンに更新される場合がございます）
               </p>
             </div>
 
             {/* Delivery Time */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                Delivery Time
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                納期について
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Repairs take approximately 10 days to complete.
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                修理は約10日前後かかります。
               </p>
             </div>
 
             {/* Payment Information */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                Payment Information
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                お支払いについて
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                After the repair is completed, we will send your umbrella along with a postal transfer form for payment at a later date.<br />
-                (Transfer fees are covered by our company)
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                修理完了後、傘と一緒に郵便振替用紙を同封してお送りいたします。<br /><br />
+                後日、お振込みいただく形となります（振込手数料は当社負担）。
               </p>
             </div>
 
             {/* Important Notice */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                Important Notice
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                ご注意
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                We only accept repairs for umbrellas manufactured domestically by our company.<br />
-                We cannot accept umbrellas from other manufacturers as they use different parts and specifications, making fabric tension different.<br />
-                Our umbrellas have a white label with our address and phone number sewn inside the fabric.<br />
-                Please check for this label. (If you send an umbrella from another manufacturer, we will return it at your expense)
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                修理は、弊社の国内生産の傘のみ対応させていただきます。<br /><br />
+                他社様の傘は部品や骨の仕様が異なり、生地の張り具合も違うため、お断りさせていただいております。<br /><br />
+                弊社の傘には、生地の内側に白いタグで住所と電話番号が縫い付けてあります。<br /><br />
+                ご確認をお願いいたします。（他社様の傘をお送りいただいた場合は、着払いにてご返送させていただきます）
               </p>
             </div>
 
             {/* Shipping Address */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                Shipping Address
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                お送り先
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                〒545-0001 2-6-15 Tennoji-cho Kita, Abeno-ku, Osaka City<br />
-                Maruyasu Umbrella Co., Ltd. Attention: Mr. Kawaguchi<br />
-                TEL: 06-6713-8308
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                〒545-0001 大阪市阿倍野区天王寺町北2-6-15<br />
+                丸安洋傘株式会社　川口様宛<br />
+                TEL：06-6713-8308
               </p>
             </div>
 
             {/* Repair Price List */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold text-green-600 mb-6 border-l-4 border-green-600 pl-4">
-                Main Repair Price List
+            <div className="bg-white border-t-4 border-gray-300 p-8 mb-8">
+              <h3 className="text-2xl font-serif-jp text-gray-800 mb-6 pb-3 border-b-2 border-gray-200">
+                主な修理代金表
               </h3>
-              <div className="text-gray-700 leading-relaxed space-y-2">
-                <p>Return shipping fee: ¥660 including tax (Hokkaido and remote islands: additional ¥1600)</p>
-                <p>Frame replacement: ¥3,300~¥4,400 including tax (varies by material and number of ribs)</p>
-                <p>Parts replacement: ¥1,100~¥1,650 including tax</p>
-                <p>Handle replacement: from ¥1,650 including tax</p>
-                <p>Strong water-repellent treatment: ¥1,100 including tax</p>
+              <div className="text-gray-700 leading-loose space-y-3 font-sans-jp">
+                <p>返送送料：660円税込（北海道・離島は別途1600円）</p>
+                <p>骨交換：3,300円～4,400円税込（素材や本数により異なります）</p>
+                <p>部品交換：1,100円～1,650円税込</p>
+                <p>持ち手交換：1,650円税込から</p>
+                <p>強力撥水加工：1,100円税込</p>
               </div>
             </div>
 
             {/* Before/After Images */}
             <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
               <div className="text-center">
-                <p className="text-lg font-medium text-gray-700 mb-4">Before</p>
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/repair/img01.png" 
-                  alt="Umbrella before repair"
+                <p className="text-lg font-medium text-gray-700 mb-4">修理前</p>
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/repair/img01.png"
+                  alt="修理前の傘"
                   className="w-64 h-64 object-cover rounded-lg shadow-md"
                 />
               </div>
               <div className="text-center">
-                <p className="text-lg font-medium text-gray-700 mb-4">After</p>
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/repair/img02.png" 
-                  alt="Umbrella after repair"
+                <p className="text-lg font-medium text-gray-700 mb-4">修理後</p>
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/repair/img02.png"
+                  alt="修理後の傘"
                   className="w-64 h-64 object-cover rounded-lg shadow-md"
                 />
               </div>
@@ -287,122 +291,122 @@ const RepairPage: React.FC = () => {
         {/* Customer Voices Section */}
         <section id="voice" className="mb-20">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Customer Reviews
-              <span className="block text-lg text-green-600 font-normal mt-2">testimonials</span>
+            <h2 className="text-4xl font-serif-jp text-gray-800 mb-4">
+              お客様の声
             </h2>
+            <p className="text-base text-gray-600 mt-2 font-sans-jp">testimonials</p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Voice 1 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                S.S from Chiba Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                千葉県 S.S様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "The umbrella I requested for repair arrived today. It was so beautifully repaired that I was very pleased. 
-                I will continue to use it with great care. Thank you very much."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「修理をお願いした傘が本日届きました。とてもきれいに修理していただき、大変満足しております。
+                これからも大切に使わせていただきます。本当にありがとうございました。」
               </p>
             </div>
 
             {/* Voice 2 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                Y.H from Kanagawa Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                神奈川県 Y.H様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "I received the umbrella yesterday. Thank you for the repair. 
-                The dirty central shaft is now shiny, and the fabric is crisp - it's practically in new condition. 
-                I will ask for your services again if the opportunity arises."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「昨日、傘を受け取りました。修理ありがとうございました。
+                汚れていた中棒もピカピカになり、生地もパリッとして、ほぼ新品同様です。
+                また機会がありましたら、よろしくお願いいたします。」
               </p>
             </div>
 
             {/* Voice 3 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                A.M from Saitama Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                埼玉県 A.M様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "Thank you for promptly responding to my request to repair my long-beloved umbrella. 
-                I was surprised that it was delivered just 5 days after sending it. I have never used a single umbrella for such a long time. 
-                I will continue to use it with great care for a long time. Thank you so much."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「長年愛用していた傘の修理を快く引き受けてくださり、ありがとうございました。
+                発送してからわずか5日で届いたのには驚きました。今まで一本の傘をこれほど長く使ったことはありません。
+                これからも大切に長く使わせていただきます。本当にありがとうございました。」
               </p>
             </div>
 
             {/* Voice 4 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                N.S from Nagano Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                長野県 N.S様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "The umbrella arrived safely the day before yesterday. I'm so happy that it came back so beautifully. 
-                The slight stains remaining on the fabric give me that feeling of 'ah, this is mine,' which makes me feel more attached to it. 
-                I will continue to use it with care. Thank you very much."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「一昨日、傘が無事に届きました。とてもきれいに戻ってきて、とても嬉しいです。
+                生地に残ったわずかな染みが、『あぁ、私のだ』という感じを与えてくれて、より愛着が湧きます。
+                これからも大切に使わせていただきます。ありがとうございました。」
               </p>
             </div>
 
             {/* Voice 5 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                S.E from Osaka Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                大阪府 S.E様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "Thank you for the quick repair. I will continue to use it with great care."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「迅速な修理をありがとうございました。これからも大切に使わせていただきます。」
               </p>
             </div>
 
             {/* Voice 6 */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                U.K from Hiroshima Prefecture
+            <div className="bg-white border-t-4 border-gray-300 p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                広島県 U.K様
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                "Thank you for your help. Although it's just one umbrella, it's a memorable one that I couldn't bear to throw away and kept by my side for a long time. 
-                I'm grateful that we had this connection and you repaired it for me."
+              <p className="text-gray-700 leading-loose font-sans-jp">
+                「お世話になりました。たかが傘一本ですが、思い出のある傘で捨てるに捨てられず、ずっと手元に置いていました。
+                ご縁があって修理していただけたこと、感謝しております。」
               </p>
             </div>
 
             {/* More voices - hidden by default */}
             {showMoreVoices && (
               <>
-                <div className="bg-white rounded-lg shadow-md p-8">
-                  <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                    K.K from Kanagawa Prefecture
+                <div className="bg-white border-t-4 border-gray-300 p-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                    神奈川県 K.K様
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    "The umbrella arrived just now. Thank you for your prompt response. 
-                    When the rib color changes, it becomes very elegant - I think my daughter will be pleased."
+                  <p className="text-gray-700 leading-loose font-sans-jp">
+                    「先ほど傘が届きました。迅速なご対応ありがとうございました。
+                    骨の色が変わると、とても上品になりますね。娘も喜ぶと思います。」
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-8">
-                  <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                    S.T from Ehime Prefecture
+                <div className="bg-white border-t-4 border-gray-300 p-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                    愛媛県 S.T様
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    "I was on a business trip and saw the repaired umbrella when I returned home last night. 
-                    I'm very happy that you repaired it so beautifully. Thank you very much. 
-                    I will use it with great care from now on. Please continue to support us in the future. Thank you."
+                  <p className="text-gray-700 leading-loose font-sans-jp">
+                    「出張に出ており、昨晩帰宅して修理していただいた傘を見ました。
+                    とてもきれいに修理していただき、大変嬉しく思います。ありがとうございました。
+                    これから大切に使わせていただきます。今後ともよろしくお願いいたします。」
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-8">
-                  <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                    O.S from Kagawa Prefecture
+                <div className="bg-white border-t-4 border-gray-300 p-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                    香川県 O.S様
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    "Thank you very much for your great help this time. It looks like new and I'm very grateful."
+                  <p className="text-gray-700 leading-loose font-sans-jp">
+                    「この度は大変お世話になりました。新品同様で大変感謝しております。」
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-8">
-                  <h3 className="text-lg font-bold text-green-600 mb-4 border-l-4 border-green-600 pl-4">
-                    N.K from Tokyo
+                <div className="bg-white border-t-4 border-gray-300 p-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 font-sans-jp">
+                    東京都 N.K様
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    "Thank you for your very prompt and beautiful work. 
-                    Since receiving this umbrella as a gift, my feelings about umbrellas have changed and I've started to take better care of them. 
-                    I will ask for maintenance again, so please take care of me then."
+                  <p className="text-gray-700 leading-loose font-sans-jp">
+                    「とても迅速で美しい仕事をしていただき、ありがとうございました。
+                    この傘をプレゼントされてから、傘に対する気持ちが変わり、大切にするようになりました。
+                    またメンテナンスをお願いすることもあるかと思いますので、その時はよろしくお願いいたします。」
                   </p>
                 </div>
               </>
@@ -414,7 +418,7 @@ const RepairPage: React.FC = () => {
                 onClick={() => setShowMoreVoices(!showMoreVoices)}
                 className="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-colors font-medium"
               >
-                {showMoreVoices ? 'Show Less' : 'Show More'}
+                {showMoreVoices ? '閉じる' : 'もっと見る'}
               </button>
             </div>
           </div>
@@ -424,13 +428,13 @@ const RepairPage: React.FC = () => {
         <section id="facebook" className="mb-20">
           <div className="text-center mb-8">
             <p className="text-lg text-gray-600 mb-4">
-              \ Follow Our Facebook Page /
+              \ Facebookページをフォロー /
             </p>
             <div className="bg-white rounded-lg shadow-md p-8">
-              <iframe 
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F%25E4%25B8%25B8%25E5%25AE%2589%25E6%25B4%258B%25E5%2582%2598-%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE-106929541003855%2F&tabs=timeline&width=500&height=650&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-                width="100%" 
-                height="650" 
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F%25E4%25B8%25B8%25E5%25AE%2589%25E6%25B4%258B%25E5%2582%2598-%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE-106929541003855%2F&tabs=timeline&width=500&height=650&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                width="100%"
+                height="650"
                 className="border-none"
                 scrolling="no"
               ></iframe>
@@ -444,7 +448,7 @@ const RepairPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Contact Us
+              お問い合わせ
               <span className="block text-lg text-green-600 font-normal mt-2">GET IN TOUCH</span>
             </h2>
           </div>
@@ -452,44 +456,44 @@ const RepairPage: React.FC = () => {
           <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
             {/* Phone Contact */}
             <div className="flex items-center space-x-4 bg-white rounded-lg p-6 shadow-md">
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_tel_contact.png" 
-                alt="Phone Icon"
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_tel_contact.png"
+                alt="電話アイコン"
                 className="w-8 h-8"
               />
               <div>
                 <p className="text-2xl font-bold text-gray-800">06-6713-8308</p>
-                <p className="text-sm text-gray-600">Business Hours: 10:00~17:00 (Closed: Sat, Sun, Holidays)</p>
+                <p className="text-sm text-gray-600">営業時間：10:00～17:00（土・日・祝日休み）</p>
               </div>
             </div>
 
             {/* Email Contact */}
             <div className="flex items-center space-x-4">
-              <Link 
+              <Link
                 to="/contact"
                 className="flex items-center space-x-3 bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-colors"
               >
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_mail_contact.png" 
-                  alt="Email"
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_mail_contact.png"
+                  alt="メール"
                   className="w-6 h-6"
                 />
-                <span className="font-medium">Email Inquiry</span>
+                <span className="font-medium">メールでのお問い合わせ</span>
               </Link>
             </div>
           </div>
 
           {/* BASE Shop Banner */}
           <div className="text-center mt-12">
-            <a 
-              href="https://maruyasu19.thebase.in/" 
-              target="_blank" 
+            <a
+              href="https://maruyasu19.thebase.in/"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
             >
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bannur.jpg" 
-                alt="Visit Our Online Shop"
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bannur.jpg"
+                alt="オンラインショップへ"
                 className="max-w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow"
               />
             </a>
@@ -504,39 +508,39 @@ const RepairPage: React.FC = () => {
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="mb-4">
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg" 
-                  alt="Maruyasu Umbrella Co., Ltd." 
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg"
+                  alt="丸安洋傘株式会社"
                   className="h-12 mb-4"
                 />
-                <h3 className="text-xl font-bold mb-2">Maruyasu Umbrella Co., Ltd.</h3>
+                <h3 className="text-xl font-bold mb-2">丸安洋傘株式会社</h3>
                 <p className="text-green-100">
                   〒545-0001<br />
-                  2-6-15 Tennoji-cho Kita, Abeno-ku, Osaka City
+                  大阪市阿倍野区天王寺町北2-6-15
                 </p>
               </div>
             </div>
 
             {/* Navigation Links */}
             <div>
-              <h4 className="font-bold mb-4">Sitemap</h4>
+              <h4 className="font-bold mb-4">サイトマップ</h4>
               <ul className="space-y-2 text-green-100">
-                <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/news" className="hover:text-white transition-colors">News</Link></li>
-                <li><Link to="/repair" className="hover:text-white transition-colors">Repair Service</Link></li>
+                <li><Link to="/" className="hover:text-white transition-colors">ホーム</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">会社概要</Link></li>
+                <li><Link to="/news" className="hover:text-white transition-colors">お知らせ</Link></li>
+                <li><Link to="/repair" className="hover:text-white transition-colors">修理・お直し</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">Products</h4>
+              <h4 className="font-bold mb-4">製品</h4>
               <ul className="space-y-2 text-green-100">
-                <li><Link to="/products/silent-umbrella" className="hover:text-white transition-colors">- Silent Umbrella</Link></li>
-                <li><Link to="/products/braid-umbrella" className="hover:text-white transition-colors">- Braid Umbrella</Link></li>
-                <li><Link to="/products/folding-umbrella" className="hover:text-white transition-colors">- Folding Umbrella</Link></li>
-                <li><Link to="/products/parasol" className="hover:text-white transition-colors">- Parasol</Link></li>
-                <li><Link to="/products/koshu-weaving" className="hover:text-white transition-colors">- Koshu Weaving</Link></li>
-                <li><Link to="/products/others" className="hover:text-white transition-colors">- Others</Link></li>
+                <li><Link to="/products/silent-umbrella" className="hover:text-white transition-colors">- サイレント傘</Link></li>
+                <li><Link to="/products/braid-umbrella" className="hover:text-white transition-colors">- ブレード傘</Link></li>
+                <li><Link to="/products/folding-umbrella" className="hover:text-white transition-colors">- 折りたたみ傘</Link></li>
+                <li><Link to="/products/parasol" className="hover:text-white transition-colors">- 日傘</Link></li>
+                <li><Link to="/products/koshu-weaving" className="hover:text-white transition-colors">- 甲州織</Link></li>
+                <li><Link to="/products/others" className="hover:text-white transition-colors">- その他</Link></li>
               </ul>
             </div>
           </div>
@@ -544,10 +548,10 @@ const RepairPage: React.FC = () => {
           <div className="border-t border-green-700 pt-8 mt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center">
               <p className="text-green-100 text-sm">
-                Copyright © Maruyasu Umbrella Co., Ltd. All rights reserved.
+                Copyright © 丸安洋傘株式会社 All rights reserved.
               </p>
-              <a 
-                href="https://readdy.ai/?origin=logo" 
+              <a
+                href="https://readdy.ai/?origin=logo"
                 className="text-green-100 hover:text-white transition-colors text-sm mt-2 sm:mt-0"
               >
                 Website Builder

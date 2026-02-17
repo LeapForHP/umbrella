@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
@@ -7,21 +7,9 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  // Determine current language based on URL
-  const getCurrentLanguage = () => {
-    if (location.pathname.startsWith('/zh')) {
-      return 'zh';
-    }
-    if (location.pathname.startsWith('/ja')) {
-      return 'ja';
-    }
-    return 'en'; // Default to English
-  };
-
-  const currentLanguage = getCurrentLanguage();
+  // Use i18n language instead of URL-based language
+  const currentLanguage = i18n.language || 'ja';
 
   // Get language display info
   const getLanguageInfo = (lang: string) => {
@@ -63,44 +51,15 @@ const Header: React.FC = () => {
     }
   };
 
-  // Change language and navigate to corresponding path
+  // Change language without navigating
   const changeLanguage = (targetLang: string) => {
-    let currentPath = location.pathname;
-
-    // Remove current language prefix
-    if (currentPath.startsWith('/zh')) {
-      currentPath = currentPath.replace('/zh', '') || '/';
-    } else if (currentPath.startsWith('/ja')) {
-      currentPath = currentPath.replace('/ja', '') || '/';
-    }
-
-    // Add target language prefix and navigate
-    let newPath = currentPath;
-    if (targetLang === 'ja') {
-      newPath = currentPath === '/' ? '/ja' : `/ja${currentPath}`;
-    } else if (targetLang === 'zh') {
-      newPath = currentPath === '/' ? '/zh' : `/zh${currentPath}`;
-    }
-
-    // Change i18n language
+    // Change i18n language only, don't navigate
     i18n.changeLanguage(targetLang);
-
-    // Navigate to new path
-    navigate(newPath);
     setIsLanguageOpen(false);
   };
 
   const languages = ['ja', 'en', 'zh'];
   const currentLangInfo = getLanguageInfo(currentLanguage);
-
-  // Get base path for current language
-  const getBasePath = () => {
-    if (currentLanguage === 'zh') return '/zh';
-    if (currentLanguage === 'ja') return '/ja';
-    return '';
-  };
-
-  const basePath = getBasePath();
 
   return (
     <header className="bg-white shadow-sm relative z-50">
@@ -109,7 +68,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1>
-              <Link to={basePath || '/'} className="flex items-center">
+              <Link to="/" className="flex items-center">
                 <img
                   src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo_hd.jpg"
                   alt="Maruyasu Umbrella Co., Ltd. | Handcrafted Japanese Umbrellas"
@@ -121,7 +80,7 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            <Link to={basePath || '/'} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+            <Link to="/" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.home')}
             </Link>
 
@@ -138,42 +97,42 @@ const Header: React.FC = () => {
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
                   <div className="py-2">
                     <Link
-                      to={`${basePath}/products/silent-umbrella`}
+                      to="/products/silent-umbrella"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
                       {t('products.silentUmbrella')}
                     </Link>
                     <Link
-                      to={`${basePath}/products/braid-umbrella`}
+                      to="/products/braid-umbrella"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
                       {t('products.braidUmbrella')}
                     </Link>
                     <Link
-                      to={`${basePath}/products/folding-umbrella`}
+                      to="/products/folding-umbrella"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
                       {t('products.foldingUmbrella')}
                     </Link>
                     <Link
-                      to={`${basePath}/products/parasol`}
+                      to="/products/parasol"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
                       {t('products.parasol')}
                     </Link>
                     <Link
-                      to={`${basePath}/products/koshu-weaving`}
+                      to="/products/koshu-weaving"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
                       {t('products.koshuWeaving')}
                     </Link>
                     <Link
-                      to={`${basePath}/products/others`}
+                      to="/products/others"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
                       onClick={() => setIsProductsOpen(false)}
                     >
@@ -184,16 +143,16 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            <Link to={`${basePath}/repair`} className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
+            <Link to="/repair" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
               {t('nav.repair')}
             </Link>
-            <Link to={`${basePath}/about`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+            <Link to="/about" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.about')}
             </Link>
-            <Link to={`${basePath}/news`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+            <Link to="/news" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.news')}
             </Link>
-            <Link to={`${basePath}/contact`} className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
+            <Link to="/contact" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.contact')}
             </Link>
 
@@ -252,42 +211,42 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-white border-t">
             <div className="py-4 space-y-4">
-              <Link to={basePath || '/'} className="block text-gray-700 hover:text-green-600 font-medium">
+              <Link to="/" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.home')}
               </Link>
               <div>
                 <div className="text-gray-700 font-medium mb-2">{t('nav.products')}</div>
                 <div className="pl-4 space-y-2">
-                  <Link to={`${basePath}/products/silent-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/silent-umbrella" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.silentUmbrella')}
                   </Link>
-                  <Link to={`${basePath}/products/braid-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/braid-umbrella" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.braidUmbrella')}
                   </Link>
-                  <Link to={`${basePath}/products/folding-umbrella`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/folding-umbrella" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.foldingUmbrella')}
                   </Link>
-                  <Link to={`${basePath}/products/parasol`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/parasol" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.parasol')}
                   </Link>
-                  <Link to={`${basePath}/products/koshu-weaving`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/koshu-weaving" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.koshuWeaving')}
                   </Link>
-                  <Link to={`${basePath}/products/others`} className="block text-sm text-gray-600 hover:text-green-600">
+                  <Link to="/products/others" className="block text-sm text-gray-600 hover:text-green-600">
                     - {t('products.others')}
                   </Link>
                 </div>
               </div>
-              <Link to={`${basePath}/repair`} className="block text-gray-700 hover:text-green-600 font-medium">
+              <Link to="/repair" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.repair')}
               </Link>
-              <Link to={`${basePath}/about`} className="block text-gray-700 hover:text-green-600 font-medium">
+              <Link to="/about" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.about')}
               </Link>
-              <Link to={`${basePath}/news`} className="block text-gray-700 hover:text-green-600 font-medium">
+              <Link to="/news" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.news')}
               </Link>
-              <Link to={`${basePath}/contact`} className="block text-gray-700 hover:text-green-600 font-medium">
+              <Link to="/contact" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.contact')}
               </Link>
 
@@ -320,7 +279,7 @@ const Header: React.FC = () => {
                   <i className="ri-phone-line mr-2"></i>
                   <span className="font-mono">06-6713-8308</span>
                 </div>
-                <Link to={`${basePath}/contact`} className="flex items-center text-green-600">
+                <Link to="/contact" className="flex items-center text-green-600">
                   <i className="ri-mail-line mr-2"></i>
                   <span>{t('nav.contact')}</span>
                 </Link>
