@@ -1,184 +1,187 @@
-import React from 'react';
-import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
-const BraidUmbrellaPage: React.FC = () => {
+const BraidUmbrellaPage = () => {
+  const { t } = useTranslation('common');
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-sans-jp">
       <Header />
-      
-      {/* Hero Section */}
-      <div className="relative h-64 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-white">Miyabi-Zakura Braided Long Umbrella</h1>
+
+      {/* Hero */}
+      <div className="bg-green-800 text-white py-12">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-serif-jp mb-1">{t('braidPage.heroTitle')}</h2>
+          <p className="text-sm tracking-widest opacity-80">{t('braidPage.heroSubtitle')}</p>
+        </div>
       </div>
 
       {/* Breadcrumb */}
-      <div className="bg-gray-50 py-4">
-        <div className="max-w-6xl mx-auto px-4">
-          <nav className="flex items-center space-x-2 text-sm">
-            <Link to="/" className="text-green-600 hover:text-green-800">Home</Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-gray-700">Miyabi-Zakura Braided Long Umbrella</span>
+      <div className="bg-gray-50 py-3 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-4">
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-green-700 transition-colors">
+              {t('braidPage.breadcrumbHome')}
+            </Link>
+            <span>/</span>
+            <span className="text-gray-800">{t('braidPage.breadcrumbCurrent')}</span>
           </nav>
         </div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <p className="text-xl text-gray-700">
-            An umbrella that embodies Japanese aesthetic sense and can truly be called a Japanese umbrella!
+      <main className="max-w-5xl mx-auto px-4 py-14">
+
+        {/* Catchphrase */}
+        <div className="text-center mb-14">
+          <p className="text-xl text-gray-700 font-serif-jp leading-relaxed">
+            {t('braidPage.catchphrase')}
           </p>
         </div>
 
-        {/* Main Content */}
-        <section className="space-y-16">
-          {/* First Section */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img01.jpg" 
-                alt="Miyabi-Zakura Braided Long Umbrella" 
-                className="w-full rounded-lg shadow-lg"
+        <div className="space-y-20">
+
+          {/* Section 1: image left / text right */}
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="overflow-hidden rounded">
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img01.jpg"
+                alt={t('braidPage.img1Alt')}
+                className="w-full object-cover"
               />
             </div>
-            
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold">
-                <span className="text-green-600">Traditional Japanese Craft of Braiding</span>
+            <div className="space-y-4">
+              <h2 className="text-2xl font-serif-jp text-green-800 border-b-2 border-green-800 pb-2 inline-block">
+                {t('braidPage.sec1Heading')}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Miyabi-Zakura was created from this concept.
-                Using materials that evoke Japan - mountain cherry, Koshu weaving - craftsmen handcraft each umbrella one by one.
-                Koshu weaving fabric is woven after dyeing the threads, so the vertical and horizontal threads create an elegant, substantial texture and feel, with a unique luster.
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('braidPage.sec1Body')}
               </p>
             </div>
           </div>
 
-          {/* Second Section */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="md:order-2">
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img02.jpg" 
-                alt="Braiding and umbrella fusion" 
-                className="w-full rounded-lg shadow-lg"
-              />
-            </div>
-            
-            <div className="space-y-6 md:order-1">
-              <h2 className="text-2xl font-bold">
-                <span className="text-green-600">Fusion of Braiding and Umbrella</span>
+          {/* Section 2: text left / image right */}
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="space-y-4 md:order-1">
+              <h2 className="text-2xl font-serif-jp text-green-800 border-b-2 border-green-800 pb-2 inline-block">
+                {t('braidPage.sec2Heading')}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Inspired by kimono obi-jime (sash cords), we carefully wrap braided cord around handles carved from rare mountain cherry from Nara's Yoshino.
-                The grip feel of Miyabi-Zakura is an unprecedented, comfortable touch. The handle doesn't slip when holding the umbrella.
-                The unique texture of Koshu weaving and braiding creates a piece that can truly be called a Made in Japan umbrella.
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('braidPage.sec2Body')}
               </p>
+            </div>
+            <div className="overflow-hidden rounded md:order-2">
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img02.jpg"
+                alt={t('braidPage.img2Alt')}
+                className="w-full object-cover"
+              />
             </div>
           </div>
 
-          {/* Center Text */}
-          <div className="text-center py-8">
-            <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-              Ten cords are hand-braided in a plain weave and carefully wrapped around the mountain cherry handle.
+          {/* Center text */}
+          <div className="text-center py-6 border-t border-b border-gray-200">
+            <p className="text-lg text-gray-700 font-serif-jp leading-relaxed max-w-2xl mx-auto">
+              {t('braidPage.centerText')}
             </p>
           </div>
 
-          {/* Third Section */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img03.png" 
-                alt="Lucky charm with expanding shape" 
-                className="w-full rounded-lg shadow-lg"
+          {/* Section 3: image left / text right */}
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="overflow-hidden rounded">
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/braid/img03.png"
+                alt={t('braidPage.img3Alt')}
+                className="w-full object-cover"
               />
             </div>
-            
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold">
-                <span className="text-green-600">Lucky Charm with Expanding Shape</span>
+            <div className="space-y-4">
+              <h2 className="text-2xl font-serif-jp text-green-800 border-b-2 border-green-800 pb-2 inline-block">
+                {t('braidPage.sec3Heading')}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Umbrellas have long been treated as lucky charms with an expanding shape, and have been used as betrothal gifts and wedding favors.
-                They are also perfect as gifts for loved ones. If any problems occur, we can repair them immediately upon request, so you can use them for a long time.
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {t('braidPage.sec3Body')}
               </p>
             </div>
           </div>
 
-          {/* Video Section */}
-          <div className="bg-gray-50 p-8 rounded-lg">
-            <h3 className="text-3xl font-bold text-center mb-8">
-              Video Introduction
-              <span className="block text-lg font-normal text-green-600 mt-2">MOVIE</span>
-            </h3>
-            
-            <div className="max-w-4xl mx-auto">
+          {/* Video section */}
+          <div className="bg-gray-50 rounded p-8">
+            <div className="text-center mb-8">
+              <h3 className="font-serif-jp text-3xl text-gray-800 mb-1">{t('braidPage.videoHeading')}</h3>
+              <p className="text-sm text-gray-500 tracking-widest">{t('braidPage.videoSubtitle')}</p>
+            </div>
+
+            <div className="max-w-3xl mx-auto">
               <div className="aspect-video mb-6">
-                <iframe 
-                  width="100%" 
-                  height="450" 
-                  src="https://www.youtube.com/embed/Q566FYjFcA4" 
-                  title="Miyabi-Zakura Braided Long Umbrella video" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Q566FYjFcA4"
+                  title={t('braidPage.heroTitle')}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="rounded-lg"
+                  className="rounded"
                 ></iframe>
               </div>
-              
-              <div className="text-center space-y-2">
-                <p className="text-gray-700">*Received Omotenashi Selection Award.</p>
-                <p className="text-gray-700">*Obtained utility model for braided handle.</p>
+
+              <div className="text-center text-sm text-gray-600 space-y-1">
+                <p>{t('braidPage.awardOmotenashi')}</p>
+                <p>{t('braidPage.awardUtility')}</p>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Contact Section */}
-        <section className="bg-gray-50 py-16 -mx-4 mt-16">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              Contact Us
-              <span className="block text-lg font-normal text-green-600 mt-2">CONTACT</span>
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="text-center">
-                <div className="mb-6">
-                  <p className="text-2xl font-bold text-gray-800 mb-2">
-                    <i className="ri-phone-line mr-2"></i>06-6713-8308
-                  </p>
-                  <p className="text-gray-600">Business Hours: 10:00-17:00 (Closed: Sat, Sun, Holidays)</p>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <Link 
-                  to="/contact" 
-                  className="inline-flex items-center bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  <i className="ri-mail-line mr-2"></i>
-                  Email Inquiry
-                </Link>
-              </div>
-            </div>
-
-            <div className="text-center mt-8">
-              <a 
-                href="https://maruyasu19.thebase.in/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block"
-              >
-                <img 
-                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bannur.jpg" 
-                  alt="Visit our online store" 
-                  className="max-w-sm mx-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                />
-              </a>
-            </div>
-          </div>
-        </section>
+        </div>
       </main>
+
+      {/* Contact Banner */}
+      <section className="bg-gray-100 py-14">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="font-serif-jp text-3xl text-gray-800 mb-1">{t('braidPage.contactHeading')}</h2>
+            <p className="text-sm text-gray-500 tracking-widest">{t('braidPage.contactSubtitle')}</p>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_tel_contact.png"
+                  alt="tel"
+                  className="h-6"
+                />
+                <span className="text-2xl font-bold text-gray-800">{t('braidPage.contactPhone')}</span>
+              </div>
+              <p className="text-sm text-gray-600">{t('braidPage.contactHours')}</p>
+            </div>
+
+            <div className="text-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-green-800 text-white px-6 py-3 rounded hover:bg-green-700 transition-colors text-sm"
+              >
+                <img
+                  src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/ico_mail_contact.png"
+                  alt="mail"
+                  className="h-5"
+                />
+                {t('braidPage.contactEmail')}
+              </Link>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="https://maruyasu19.thebase.in/" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/bannur.jpg"
+                alt={t('braidPage.onlineStoreAlt')}
+                className="mx-auto"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
