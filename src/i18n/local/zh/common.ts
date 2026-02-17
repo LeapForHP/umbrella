@@ -230,6 +230,27 @@ export const common = {
     onlineStore: '访问我们的在线商店',
   },
 
+  // About page
+  aboutPage: {
+    heroTitle: '公司概况',
+    heroSubtitle: 'COMPANY',
+    companyHeading: '公司概况',
+    companySubtitle: 'COMPANY',
+    mapHeading: '交通路线',
+    mapSubtitle: 'MAP',
+    tableName: '公司名称',
+    tableNameValue: '丸安洋傘株式会社',
+    tableAddress: '地址',
+    tableAddressValue: '〒545-0001 大阪市阿倍野区天王寺町北2-6-15',
+    tableHours: '营业时间',
+    tableHoursValue: '10:00 ～ 17:00',
+    tableClosed: '休息日',
+    tableClosedValue: '周六、周日、节假日、夏季、年末年初',
+    tableTel: '电话',
+    img1Alt: '丸安洋傘株式会社 外观',
+    img2Alt: '丸安洋傘株式会社 工坊',
+  },
+
   // Contact page
   contactPage: {
     heroTitle: '联系我们',

@@ -14,40 +14,10 @@ const Header: React.FC = () => {
   // Get language display info
   const getLanguageInfo = (lang: string) => {
     switch (lang) {
-      case 'ja':
-        return {
-          name: t('language.japanese'),
-          flag: (
-            <div className="w-6 h-4 bg-white border border-gray-200 rounded-sm flex items-center justify-center relative">
-              <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-            </div>
-          )
-        };
-      case 'en':
-        return {
-          name: t('language.english'),
-          flag: (
-            <div className="w-6 h-4 bg-red-600 rounded-sm flex items-center justify-center">
-              <div className="w-4 h-3 bg-white rounded-sm flex items-center justify-center">
-                <div className="w-3 h-1.5 bg-red-600 rounded-sm"></div>
-              </div>
-            </div>
-          )
-        };
-      case 'zh':
-        return {
-          name: t('language.chinese'),
-          flag: (
-            <div className="w-6 h-4 bg-red-600 rounded-sm flex items-center justify-center relative">
-              <div className="absolute top-0 left-0 w-3 h-2 bg-red-600"></div>
-              <div className="absolute top-0 right-0 w-3 h-4 bg-yellow-400 flex items-center justify-center">
-                <div className="text-red-600 text-xs">★</div>
-              </div>
-            </div>
-          )
-        };
-      default:
-        return { name: t('language.japanese'), flag: null };
+      case 'ja': return { name: t('language.japanese') };
+      case 'en': return { name: t('language.english') };
+      case 'zh': return { name: t('language.chinese') };
+      default:   return { name: t('language.japanese') };
     }
   };
 
@@ -143,14 +113,8 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            <Link to="/repair" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
-              {t('nav.repair')}
-            </Link>
             <Link to="/about" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.about')}
-            </Link>
-            <Link to="/news" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
-              {t('nav.news')}
             </Link>
             <Link to="/contact" className="text-gray-700 hover:text-green-600 font-medium whitespace-nowrap">
               {t('nav.contact')}
@@ -162,7 +126,6 @@ const Header: React.FC = () => {
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                 className="flex items-center space-x-2 px-3 py-2 rounded-md border border-gray-300 hover:border-green-600 hover:bg-green-50 transition-colors cursor-pointer whitespace-nowrap"
               >
-                {currentLangInfo.flag}
                 <span className="text-sm font-medium">{currentLangInfo.name}</span>
                 <i className={`ri-arrow-down-s-line text-xs transition-transform ${isLanguageOpen ? 'rotate-180' : ''}`}></i>
               </button>
@@ -182,7 +145,6 @@ const Header: React.FC = () => {
                               : 'text-gray-700 hover:bg-green-50 hover:text-green-600'
                           }`}
                         >
-                          {langInfo.flag}
                           <span>{langInfo.name}</span>
                         </button>
                       );
@@ -237,14 +199,8 @@ const Header: React.FC = () => {
                   </Link>
                 </div>
               </div>
-              <Link to="/repair" className="block text-gray-700 hover:text-green-600 font-medium">
-                {t('nav.repair')}
-              </Link>
               <Link to="/about" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.about')}
-              </Link>
-              <Link to="/news" className="block text-gray-700 hover:text-green-600 font-medium">
-                {t('nav.news')}
               </Link>
               <Link to="/contact" className="block text-gray-700 hover:text-green-600 font-medium">
                 {t('nav.contact')}
@@ -266,7 +222,6 @@ const Header: React.FC = () => {
                             : 'text-gray-600 hover:text-green-600'
                         }`}
                       >
-                        {langInfo.flag}
                         <span>{langInfo.name}</span>
                       </button>
                     );

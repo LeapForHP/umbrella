@@ -230,6 +230,27 @@ export const common = {
     onlineStore: 'Visit Our Online Store',
   },
 
+  // About page
+  aboutPage: {
+    heroTitle: 'Company Overview',
+    heroSubtitle: 'COMPANY',
+    companyHeading: 'Company Overview',
+    companySubtitle: 'COMPANY',
+    mapHeading: 'Access Map',
+    mapSubtitle: 'MAP',
+    tableName: 'Company Name',
+    tableNameValue: 'Maruyasu Yougasa Co., Ltd.',
+    tableAddress: 'Address',
+    tableAddressValue: '〒545-0001 2-6-15 Tennoji-cho Kita, Abeno-ku, Osaka City',
+    tableHours: 'Business Hours',
+    tableHoursValue: '10:00 - 17:00',
+    tableClosed: 'Closed',
+    tableClosedValue: 'Saturdays, Sundays, National Holidays, Summer holidays, Year-end and New Year holidays',
+    tableTel: 'TEL',
+    img1Alt: 'Maruyasu Yougasa Co., Ltd. Exterior',
+    img2Alt: 'Maruyasu Yougasa Co., Ltd. Workshop',
+  },
+
   // Contact page
   contactPage: {
     heroTitle: 'Contact Us',

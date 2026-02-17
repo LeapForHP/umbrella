@@ -79,22 +79,12 @@ const Footer: React.FC = () => {
               <div>
                 <ul className="space-y-3">
                   <li>
-                    <a href="#company" className="text-gray-300 hover:text-white transition-colors duration-300">
+                    <a href="/about" className="text-gray-300 hover:text-white transition-colors duration-300">
                       {t('footer.navigation.aboutUs')}
                     </a>
                   </li>
                   <li>
-                    <a href="#news" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      {t('footer.navigation.news')}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#repair" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      {t('footer.navigation.repairService')}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#contact" className="text-gray-300 hover:text-white transition-colors duration-300">
+                    <a href="/contact" className="text-gray-300 hover:text-white transition-colors duration-300">
                       {t('footer.navigation.contact')}
                     </a>
                   </li>
