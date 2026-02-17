@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Header from '@/pages/home/components/Header';
-import Footer from '@/pages/home/components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function ContactPage() {
   const { t } = useTranslation('common');

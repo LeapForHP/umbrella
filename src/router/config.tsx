@@ -2,17 +2,17 @@ import { RouteObject } from 'react-router-dom';
 import { lazy } from 'react';
 
 // Lazy load components (now unified for all languages)
-const HomePage = lazy(() => import('../pages/home/page'));
-const AboutPage = lazy(() => import('../pages/about/page'));
-const NewsPage = lazy(() => import('../pages/news/page'));
-const ContactPage = lazy(() => import('../pages/contact/page'));
-const RepairPage = lazy(() => import('../pages/repair/page'));
-const SilentUmbrellaPage = lazy(() => import('../pages/products/silent-umbrella/page'));
-const BraidUmbrellaPage = lazy(() => import('../pages/products/braid-umbrella/page'));
-const FoldingUmbrellaPage = lazy(() => import('../pages/products/folding-umbrella/page'));
-const ParasolPage = lazy(() => import('../pages/products/parasol/page'));
-const KoshuWeavingPage = lazy(() => import('../pages/products/koshu-weaving/page'));
-const OthersPage = lazy(() => import('../pages/products/others/page'));
+const HomePage = lazy(() => import('../pages/home'));
+const AboutPage = lazy(() => import('../pages/about'));
+const NewsPage = lazy(() => import('../pages/news'));
+const ContactPage = lazy(() => import('../pages/contact'));
+const RepairPage = lazy(() => import('../pages/repair'));
+const SilentUmbrellaPage = lazy(() => import('../pages/products/silent-umbrella'));
+const BraidUmbrellaPage = lazy(() => import('../pages/products/braid-umbrella'));
+const FoldingUmbrellaPage = lazy(() => import('../pages/products/folding-umbrella'));
+const ParasolPage = lazy(() => import('../pages/products/parasol'));
+const KoshuWeavingPage = lazy(() => import('../pages/products/koshu-weaving'));
+const OthersPage = lazy(() => import('../pages/products/others'));
 const NotFoundPage = lazy(() => import('../pages/NotFound'));
 
 const routes: RouteObject[] = [

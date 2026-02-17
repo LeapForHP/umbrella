@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import NewsSection from './components/NewsSection';
-import ProductsSection from './components/ProductsSection';
-import SilentUmbrellaSection from './components/SilentUmbrellaSection';
-import BraidUmbrellaSection from './components/BraidUmbrellaSection';
-import FoldingUmbrellaSection from './components/FoldingUmbrellaSection';
-import RepairSection from './components/RepairSection';
-import CompanySection from './components/CompanySection';
-import MediaSection from './components/MediaSection';
-import SocialSection from './components/SocialSection';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
+import NewsSection from '@/components/NewsSection';
+import ProductsSection from '@/components/ProductsSection';
+import SilentUmbrellaSection from '@/components/SilentUmbrellaSection';
+import BraidUmbrellaSection from '@/components/BraidUmbrellaSection';
+import FoldingUmbrellaSection from '@/components/FoldingUmbrellaSection';
+import RepairSection from '@/components/RepairSection';
+import CompanySection from '@/components/CompanySection';
+import MediaSection from '@/components/MediaSection';
+import SocialSection from '@/components/SocialSection';
+import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
 
 const HomePage: React.FC = () => {
   return (

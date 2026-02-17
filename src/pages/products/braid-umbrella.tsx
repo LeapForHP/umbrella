@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../../home/components/Footer';
+import Footer from '@/components/Footer';
 
 const BraidUmbrellaPage: React.FC = () => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
