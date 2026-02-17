@@ -1,91 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 const SilentUmbrellaPage: React.FC = () => {
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Header with Language Dropdown */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <img 
-                src="https://maruyasuweb.jp/wp-content/themes/maruyasuweb/img/cmn/logo.png"
-                alt="Maruyasu Umbrella"
-                className="h-12"
-              />
-            </Link>
-
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/about" className="text-gray-700 hover:text-green-600 transition-colors">About Us</Link>
-              <div className="relative group">
-                <button className="text-gray-700 hover:text-green-600 transition-colors flex items-center">
-                  Products
-                  <i className="ri-arrow-down-s-line ml-1"></i>
-                </button>
-                <div className="absolute top-full left-0 bg-white shadow-lg rounded-md py-2 min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/products/silent-umbrella" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Silent Umbrella</Link>
-                  <Link to="/products/braid-umbrella" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Braid Umbrella</Link>
-                  <Link to="/products/folding-umbrella" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Folding Umbrella</Link>
-                  <Link to="/products/parasol" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Parasol</Link>
-                  <Link to="/products/koshu-weaving" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Koshu Weaving</Link>
-                  <Link to="/products/others" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Others</Link>
-                </div>
-              </div>
-              <Link to="/repair" className="text-gray-700 hover:text-green-600 transition-colors">Repair</Link>
-              <Link to="/news" className="text-gray-700 hover:text-green-600 transition-colors">News</Link>
-              <Link to="/contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</Link>
-            </nav>
-
-            {/* Language Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                onMouseEnter={() => setIsLanguageOpen(true)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
-              >
-                <span className="text-lg">🇺🇸</span>
-                <span className="text-sm font-medium">English</span>
-                <i className="ri-arrow-down-s-line text-sm"></i>
-              </button>
-
-              {isLanguageOpen && (
-                <div 
-                  className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg py-2 min-w-[140px] z-50"
-                  onMouseLeave={() => setIsLanguageOpen(false)}
-                >
-                  <Link
-                    to="/ja/products/silent-umbrella"
-                    className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-50 transition-colors"
-                  >
-                    <span className="text-lg">🇯🇵</span>
-                    <span className="text-sm">日本語</span>
-                  </Link>
-                  <Link
-                    to="/products/silent-umbrella"
-                    className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-50 transition-colors bg-blue-50"
-                  >
-                    <span className="text-lg">🇺🇸</span>
-                    <span className="text-sm">English</span>
-                  </Link>
-                  <Link
-                    to="/zh/products/silent-umbrella"
-                    className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-50 transition-colors"
-                  >
-                    <span className="text-lg">🇨🇳</span>
-                    <span className="text-sm">中文</span>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
       
       {/* Hero Section */}
       <div className="relative h-64 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">

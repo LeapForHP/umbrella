@@ -11,13 +11,13 @@ const Header: React.FC = () => {
   // Use i18n language instead of URL-based language
   const currentLanguage = i18n.language || 'ja';
 
-  // Get language display info
+  // Language names are always shown in their own language regardless of current locale
   const getLanguageInfo = (lang: string) => {
     switch (lang) {
-      case 'ja': return { name: t('language.japanese') };
-      case 'en': return { name: t('language.english') };
-      case 'zh': return { name: t('language.chinese') };
-      default:   return { name: t('language.japanese') };
+      case 'ja': return { name: '日本語' };
+      case 'en': return { name: 'English' };
+      case 'zh': return { name: '中文' };
+      default:   return { name: '日本語' };
     }
   };
 
